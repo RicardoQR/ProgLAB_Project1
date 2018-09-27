@@ -21,12 +21,21 @@ struct node {
 	struct node *left_child = NULL;
 };
 
-int search_node () {
+/*int search_node () {
 
-}
+}*/
+
+/*int print_family(struct node *nodeptr) {
+	cout << "###### For node with name " << nodeptr->name << " and ID: " << nodeptr->ID << " ###### "<< endl;
+	cout << "Node's height: " << nodeptr->height << endl;	
+	(nodeptr->parent)? cout << "Parent: " << nodeptr->parent->name << " ID: "<< nodeptr->parent->ID << endl : cout << "Parent: NULL. This node is the root" << endl;
+	(nodeptr->right_child)? cout << "Right child: " << nodeptr->right_child->name << " ID: "<< nodeptr->right_child->ID  << endl : cout << "No right child!" << endl;
+	(nodeptr->left_child)? cout << "Left child: " << nodeptr->left_child->name << " ID: "<< nodeptr->left_child->ID  << endl : cout << "No left child!" << endl;
+}*/
 
 int LL_rotation (struct node *nodeA, struct node *nodeB) {
 	//first we search if the parent node is either a right or left child
+
 	bool rc;
 	if (nodeA->parent) {
 		if (nodeA == ((nodeA->parent)->right_child)) {
@@ -91,8 +100,8 @@ int LL_rotation (struct node *nodeA, struct node *nodeB) {
 		(tmppointer->left_child)? LC_height = (tmppointer->left_child)->height : LC_height = 0; 
 
 		//finally we assign the value to the node:
-		cout << "RC_height" << RC_height << endl; 
-		cout << "LC_height" << LC_height << endl; 		
+		/*cout << "RC_height" << RC_height << endl; 
+		cout << "LC_height" << LC_height << endl;*/ 		
 
 		(RC_height >= LC_height)? tmppointer->height = RC_height +1 : tmppointer->height = LC_height+1;
 
@@ -108,6 +117,7 @@ int LL_rotation (struct node *nodeA, struct node *nodeB) {
 int RR_rotation (struct node *nodeA, struct node *nodeB) {
 	//first we search if the parent node is either a right or left child
 	bool rc;
+
 	if (nodeA->parent) {
 		if (nodeA == ((nodeA->parent)->right_child)) {
 			rc = true;
@@ -166,15 +176,20 @@ int RR_rotation (struct node *nodeA, struct node *nodeB) {
 
 	while (tmppointer) {
 
+		//cout << "TMPPOINTER IS: " << tmppointer->name << endl;
+
 		//first we need to get the height of their children
-		(tmppointer->right_child)? RC_height = (tmppointer->right_child)->height : RC_height = 0; 
-		(tmppointer->left_child)? LC_height = (tmppointer->left_child)->height : LC_height = 0; 
+		/*cout << tmppointer->right_child->name << endl;
+		cout << tmppointer->left_child->name << endl;*/
+
+		RC_height = (tmppointer->right_child)? (tmppointer->right_child)->height :  0; 
+		LC_height = (tmppointer->left_child)? (tmppointer->left_child)->height : 0; 
 
 		//finally we assign the value to the node:
-		cout << "RC_height" << RC_height << endl; 
-		cout << "LC_height" << LC_height << endl; 		
+		/*cout << "RC_height" << RC_height << endl; 
+		cout << "LC_height" << LC_height << endl; */		
 
-		(RC_height >= LC_height)? tmppointer->height = RC_height +1 : tmppointer->height = LC_height+1;
+		tmppointer->height = (RC_height >= LC_height)? RC_height +1 : LC_height+1;
 
 		//switches to the next level in the following iteration:
 
@@ -190,6 +205,8 @@ int LR_rotation (struct node *nodeA, struct node *nodeB) {
 	//in this case we need to add the third involved node
 
 	struct node *nodeC = nodeB->right_child;
+
+	cout << nodeC->name << endl;
 
 	bool rc;
 	if (nodeA->parent) {
@@ -252,7 +269,7 @@ int LR_rotation (struct node *nodeA, struct node *nodeB) {
 	int RC_height;
 	int LC_height;
 
-	cout << "LR height update temppointer:" << tmppointer->name << endl;
+	//cout << "LR height update temppointer:" << tmppointer->name << endl;
 
 	while (tmppointer) {
 
@@ -265,12 +282,12 @@ int LR_rotation (struct node *nodeA, struct node *nodeB) {
 			
 			struct node *tmppointer2 = nodeC->left_child;
 
-			(tmppointer2->right_child)? RC_height = (tmppointer2->right_child)->height : RC_height = 0; 
-			(tmppointer2->left_child)? LC_height = (tmppointer2->left_child)->height : LC_height = 0; 
+			/*(tmppointer2->right_child)? RC_height = (tmppointer2->right_child)->height : RC_height = 0; 
+			(tmppointer2->left_child)? LC_height = (tmppointer2->left_child)->height : LC_height = 0; */
 
 			//finally we assign the value to the node:
-			cout << "RC_height" << RC_height << endl; 
-			cout << "LC_height" << LC_height << endl; 		
+			/*cout << "RC_height" << RC_height << endl; 
+			cout << "LC_height" << LC_height << endl; */		
 
 			(RC_height >= LC_height)? tmppointer2->height = RC_height +1 : tmppointer2->height = LC_height+1;
 
@@ -281,8 +298,8 @@ int LR_rotation (struct node *nodeA, struct node *nodeB) {
 		(tmppointer->left_child)? LC_height = (tmppointer->left_child)->height : LC_height = 0; 
 
 		//finally we assign the value to the node:
-		cout << "RC_height" << RC_height << endl; 
-		cout << "LC_height" << LC_height << endl; 		
+		/*cout << "RC_height" << RC_height << endl; 
+		cout << "LC_height" << LC_height << endl; 	*/	
 
 		(RC_height >= LC_height)? tmppointer->height = RC_height +1 : tmppointer->height = LC_height+1;
 
@@ -361,7 +378,7 @@ int RL_rotation (struct node *nodeA, struct node *nodeB) {
 	int RC_height;
 	int LC_height;
 
-	cout << "LR height update temppointer:" << tmppointer->name << endl;
+	cout << "RL height update temppointer:" << tmppointer->name << endl;
 
 	while (tmppointer) {
 
@@ -378,8 +395,8 @@ int RL_rotation (struct node *nodeA, struct node *nodeB) {
 			(tmppointer2->left_child)? LC_height = (tmppointer2->left_child)->height : LC_height = 0; 
 
 			//finally we assign the value to the node:
-			cout << "RC_height" << RC_height << endl; 
-			cout << "LC_height" << LC_height << endl; 		
+			/*cout << "RC_height" << RC_height << endl; 
+			cout << "LC_height" << LC_height << endl;*/ 		
 
 			(RC_height >= LC_height)? tmppointer2->height = RC_height +1 : tmppointer2->height = LC_height+1;
 
@@ -390,8 +407,8 @@ int RL_rotation (struct node *nodeA, struct node *nodeB) {
 		(tmppointer->left_child)? LC_height = (tmppointer->left_child)->height : LC_height = 0; 
 
 		//finally we assign the value to the node:
-		cout << "RC_height" << RC_height << endl; 
-		cout << "LC_height" << LC_height << endl; 		
+		/*cout << "RC_height" << RC_height << endl; 
+		cout << "LC_height" << LC_height << endl; */		
 
 		(RC_height >= LC_height)? tmppointer->height = RC_height +1 : tmppointer->height = LC_height+1;
 
@@ -404,7 +421,7 @@ int RL_rotation (struct node *nodeA, struct node *nodeB) {
 }
 
 
-int insert_node (string new_name, unsigned int newID, struct tree *treepointer) {
+int insert_node (string new_name, unsigned int newID, struct tree *treepointer, bool debug = false) {
 
 	struct node *tmppointer;
 	tmppointer = treepointer->tree_root;
@@ -416,6 +433,7 @@ int insert_node (string new_name, unsigned int newID, struct tree *treepointer) 
 		cout << "no es un root" << endl;
 		return -1;*/
 	if (!treepointer->tree_root) {
+
 		//means that the tree has not yet been initialized, hence it has no root.
 		//We proceed to insert the first node.
 		node* new_node = new node;
@@ -430,6 +448,11 @@ int insert_node (string new_name, unsigned int newID, struct tree *treepointer) 
 			new_node->name = new_name;
 
 			cout << "Inserting first node.." << endl;
+
+			/*if (debug) {
+				print_family(new_node);
+			}*/
+
 			return 0;
 		}
 	} else {
@@ -438,41 +461,23 @@ int insert_node (string new_name, unsigned int newID, struct tree *treepointer) 
 		do {
 			if (newID > (tmppointer->ID)) {
 				if (tmppointer->right_child) {	
-
-					//depending on whether the node was inserted on the right or the left, 
-					//and depending on which side was longer, we decide if we add to the 
-					//parents height or not	
-
-					if (!(tmppointer->left_child) || (tmppointer->left_child->height <= tmppointer->right_child->height)) {
-						tmppointer->height = (tmppointer->height)+1;
-					}
-
 					tmppointer = (tmppointer->right_child);
 				} else {
-					if (!(tmppointer->left_child)) {
-						tmppointer->height = (tmppointer->height)+1;
-					}
 					leaf = true;
 				}
 				rc = true;
 
 			} else if (newID <= (tmppointer->ID)) {
 				if (tmppointer->left_child) {
-					if (!(tmppointer->right_child) || (tmppointer->right_child->height <= tmppointer->left_child->height)) {
-						tmppointer->height = (tmppointer->height)+1;
-						//cout << "holis" << endl;
-					}
 					tmppointer = (tmppointer->left_child);					
 				} else {
-					if (!(tmppointer->right_child)) {
-						tmppointer->height = (tmppointer->height)+1;
-					}
 					leaf = true;
 				}			
 				rc = false;
 			}
 
 		} while (!leaf);
+
 
 		//now that we've found the parent node for the newly inserted node,
 		//we proceed to insert it (and its related data):
@@ -494,6 +499,29 @@ int insert_node (string new_name, unsigned int newID, struct tree *treepointer) 
 			} else {
 				tmppointer->left_child = new_node;
 			}
+
+
+			//first we need to refresh the height values from the last node going up
+
+			struct node *tmpheight_ptr = tmppointer;
+			int RC_height;
+			int LC_height;
+
+			while (tmpheight_ptr) {
+
+				RC_height = (tmpheight_ptr->right_child)? (tmpheight_ptr->right_child)->height :  0; 
+				LC_height = (tmpheight_ptr->left_child)? (tmpheight_ptr->left_child)->height : 0; 
+
+			//finally we assign the value to the node:
+				/*cout << "RC_height" << RC_height << endl; 
+				cout << "LC_height" << LC_height << endl; */		
+
+				tmpheight_ptr->height = (RC_height >= LC_height)? RC_height +1 : LC_height+1;
+
+			//switches to the next level in the following iteration:
+
+				tmpheight_ptr = tmpheight_ptr->parent;
+			} 
 
 
 			// then we need to analyze if a rotation is needed or not, going from the buttom-up
@@ -520,7 +548,7 @@ int insert_node (string new_name, unsigned int newID, struct tree *treepointer) 
 
 				//we determine the balance factor of each node by looking at the height of their nodes;
 
-				//if node doesnt exit then a value of 0 for its height is assigned;
+				//if node doesnt exist then a value of 0 for its height is assigned;
 
 				(tmppointer->right_child)? rc_height = (tmppointer->right_child->height) : rc_height = 0;
 				(tmppointer->left_child)? lc_height = (tmppointer->left_child->height) : lc_height = 0;
@@ -533,8 +561,8 @@ int insert_node (string new_name, unsigned int newID, struct tree *treepointer) 
 				//cout << "parent_rc_height " << parent_rc_height << endl;
 				//cout << "parent_lc_height " << parent_lc_height << endl;
 
-				cout << "balance_factor of:" << tmppointer->name <<" is: "<< balance_factor << endl;
-				cout << "balance factor of:" << parent_tmppointer->name << " is: " << parent_balance_factor << endl;				
+				/*cout << "balance_factor of:" << tmppointer->name <<" is: "<< balance_factor << endl;
+				cout << "balance factor of:" << parent_tmppointer->name << " is: " << parent_balance_factor << endl;*/				
 
 				//now we analyze each case to see if a rotation is needed. If it is, the we look for the appropiate
 				//rotation depending on the situation.
@@ -577,6 +605,9 @@ int insert_node (string new_name, unsigned int newID, struct tree *treepointer) 
 				tmppointer = parent_tmppointer;
 			}
 
+			/*if (debug) {
+				print_family(new_node);
+			}*/
 
 			return 0;
 		}
@@ -618,7 +649,7 @@ int GetMinID (struct tree *treeptr) {
 }
 
 
-int create_tree (vector<string> namevec, vector<int> IDvec, string TreeName = "NewTree") {
+struct tree* create_tree (vector<string> namevec, vector<int> IDvec, string TreeName = "NewTree") {
 
 	//first we instanciate the new tree
 
@@ -637,7 +668,7 @@ int create_tree (vector<string> namevec, vector<int> IDvec, string TreeName = "N
 	cout << "Right_child is: " << treeptr->tree_root->right_child->name << " with ID: "<< treeptr->tree_root->right_child->ID << endl ;
 	cout << "Left_child is: " << treeptr->tree_root->left_child->name << " with ID: "<< treeptr->tree_root->left_child->ID << endl ;
 
-	return 0;
+	return treeptr;
 }
 
 

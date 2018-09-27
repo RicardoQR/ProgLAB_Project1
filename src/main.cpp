@@ -5,12 +5,13 @@
 #include <fstream>
 #include <vector>
 #include <regex>
+#include <chrono>
 
 
 int main () {
 
 	ifstream infile;
-	infile.open("../misc/inputs/lista_10.txt");
+	infile.open("../misc/inputs/lista_1000.txt");
 
 	string name;
 	string strID;
@@ -21,10 +22,18 @@ int main () {
 
 	regex valid_name("[a-z]+");
 
+	//start execution chronometer:
+
+
 	while (!infile.eof()) {
 		getline(infile,name,',');
 		getline(infile,strID,'\n');
-		ID = stoi(strID);
+
+		try {
+			ID = stoi(strID);
+		} catch (const out_of_range& e) {
+			cout << "Name: " << name << "with ID: " << strID << "wasnt added because ID size exceeds the maximum number allowed..." << endl;
+		}
 
 		//now we add each of the line contents to the respective vector:
 		if (regex_search(name,valid_name)) {
@@ -37,8 +46,37 @@ int main () {
 
 	}
 
-	create_tree(namevec,IDvec,"Tree1");
+	// Record start time
+	auto start = chrono::high_resolution_clock::now();
+
+
+	//Then we create the tree with all the information of the text files
+
+	struct tree *treeptr = create_tree(namevec,IDvec,"Tree1");
+
+	// Now we look for the lowest and highest ID value of the list.
+
+	cout << endl;
+	cout << "##############################################" << endl;
+	cout << endl;
+
+	GetMaxID(treeptr);
+	GetMinID(treeptr);
+
+
+
+	// Record end time
+	auto finish = chrono::high_resolution_clock::now();
+
+	// Save the time in a special variable
+	chrono::duration<double> elapsed = finish - start;
+
+	cout << "TIMESTAMP: the execution of the program took: " << elapsed.count() << " seconds... " << endl;
 	
+	cout << endl;
+	cout << "##############################################" << endl;
+	cout << endl;
+
 	return 0;
 
 }
